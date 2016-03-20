@@ -1,0 +1,45 @@
+[
+    {
+        "heroes": [
+            {"id":0,"label":"genji","name":"Genji","role":"offense"},
+            {"id":1,"label":"mccree","name":"McCree","role":"offense"},
+            {"id":2,"label":"pharah","name":"Pharah","role":"offense"},
+            {"id":3,"label":"reaper","name":"Reaper","role":"offense"},
+            {"id":4,"label":"soldier-76","name":"Soldier 76","role":"offense"},
+            {"id":5,"label":"tracer","name":"Tracer","role":"offense"},
+            {"id":6,"label":"bastion","name":"Bastion","role":"defense"},
+            {"id":7,"label":"junkrat","name":"Junkrat","role":"defense"},
+            {"id":8,"label":"hanzo","name":"Hanzo","role":"defense"},
+            {"id":9,"label":"mei","name":"Mei","role":"defense"},
+            {"id":10,"label":"torbjorn","name":"Torbjörn","role":"defense"},
+            {"id":11,"label":"widowmaker","name":"Widowmaker","role":"defense"},
+            {"id":12,"label":"dva","name":"D.Va","role":"tank"},
+            {"id":13,"label":"reinhardt","name":"Reinhardt","role":"tank"},
+            {"id":14,"label":"roadhog","name":"Roadhog","role":"tank"},
+            {"id":15,"label":"winston","name":"Winston","role":"tank"},
+            {"id":16,"label":"zarya","name":"Zarya","role":"tank"},
+            {"id":17,"label":"lucio","name":"Lucio","role":"support"},
+            {"id":18,"label":"mercy","name":"Mercy","role":"support"},
+            {"id":19,"label":"symmetra","name":"Symmetra","role":"support"},
+            {"id":20,"label":"zenyatta","name":"Zenyatta","role":"support"},
+            {"id":21,"label":"nopick","name":"No Pick","role":"nope"}
+        ],
+        "maps": [
+            {"id":0,"label":"dorado","name":"Dorado"},
+            {"id":1,"label":"gibraltar","name":"Watchpoint: Gibraltar"},
+            {"id":2,"label":"hanamura","name":"Hanamura"},
+            {"id":3,"label":"anubis","name":"Temple of Anubis"},
+            {"id":4,"label":"volskaya","name":"Volskaya Industries"},
+            {"id":5,"label":"numbani","name":"Numbani"},
+            {"id":6,"label":"hollywood","name":"Hollywood"},
+            {"id":7,"label":"king-row","name":"King's Row"},
+            {"id":8,"label":"nepal","name":"Nepal"},
+            {"id":9,"label":"lijiang-tower","name":"Lijiang Tower"},
+            {"id":10,"label":"nomap","name":"Basic line up"}
+        ],
+        "side": [
+            {"id":0,"label":"attack","name":"Attack"},
+            {"id":1,"label":"defense","name":"Defense"}
+        ]
+      }
+]

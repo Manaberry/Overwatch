@@ -1,0 +1,22 @@
+<div class="login" ng-keypress="enter($event,user)" ng-if="!connected.status">
+	<h2>SIGN IN</h2>
+	<form name="logform">
+        	<input type="text" ng-model="user.username" placeholder="username" required>
+        	<br>
+        	<input type="password" ng-model="user.password" placeholder="password" required>
+        	<br>
+        	<span class="details">{{details}}</span>
+	</form>
+	<button class="skew {{connected}}" ng-click="submit(user)" ng-enter="submit(user)" ng-disabled="logform.$invalid">Access</button>
+</div>
+
+
+<div class="login" ng-keypress="enter($event,user)" ng-if="connected.status">
+	<h2>{{connected.message}}</h2>
+	<button ng-click="logout()" class="red skew">Logout</button>
+</div>
+
+
+<div class="backhistory">
+	<a href="#/"><button class="share skew">Back to home</button></a>
+</div>

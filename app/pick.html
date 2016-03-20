@@ -1,0 +1,108 @@
+<div class="phase hide">
+  <button class="skew" ng-click="pickMap()">
+    {{map.name}}
+  </button>
+</div>
+<ul class="slot">
+  <li>
+    <div class="player-hero player1">
+      <div class="offpick player10">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p10.role}}.png" ng-if="p10.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p10.label}}.png" ng-click="pickHeroes('player10')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p1.role}}.png" ng-if="p1.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p1.label}}.png" ng-click="pickHeroes('player1')">
+    </div>
+    <span class="player" ng-click="enableEditor('player1')">{{player1}}</span>
+  </li>
+  <li>
+    <div class="player-hero player2">
+      <div class="offpick">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p20.role}}.png" ng-if="p20.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p20.label}}.png" ng-click="pickHeroes('player20')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p2.role}}.png" ng-if="p2.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p2.label}}.png" ng-click="pickHeroes('player2')">
+    </div>
+    <span class="player" ng-click="enableEditor('player2')">{{player2}}</span>
+  </li>
+  <li>
+    <div class="player-hero player3">
+      <div class="offpick">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p30.role}}.png" ng-if="p30.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p30.label}}.png" ng-click="pickHeroes('player30')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p3.role}}.png" ng-if="p3.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p3.label}}.png" ng-click="pickHeroes('player3')">
+    </div>
+    <span class="player" ng-click="enableEditor('player3')">{{player3}}</span>
+  </li>
+  <li>
+    <div class="player-hero player4">
+      <div class="offpick">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p40.role}}.png" ng-if="p40.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p40.label}}.png" ng-click="pickHeroes('player40')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p4.role}}.png" ng-if="p4.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p4.label}}.png" ng-click="pickHeroes('player4')">
+    </div>
+    <span class="player" ng-click="enableEditor('player4')">{{player4}}</span>
+  </li>
+  <li>
+    <div class="player-hero player5">
+      <div class="offpick">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p50.role}}.png" ng-if="p50.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p50.label}}.png" ng-click="pickHeroes('player50')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p5.role}}.png" ng-if="p5.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p5.label}}.png" ng-click="pickHeroes('player5')">
+    </div>
+    <span class="player" ng-click="enableEditor('player5')">{{player5}}</span>
+  </li>
+  <li>
+    <div class="player-hero player6">
+      <div class="offpick">
+        <img class="role" width=15 height=15 src="images/owheroes/role-{{p60.role}}.png" ng-if="p60.role != 'nope'">
+        <img class="heroAvatar skew" width=40 height=40 src="images/owheroes/{{p60.label}}.png" ng-click="pickHeroes('player60')">
+      </div>
+      <img class="role" width=20 height=20 src="images/owheroes/role-{{p6.role}}.png" ng-if="p6.role != 'nope'">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{p6.label}}.png" ng-click="pickHeroes('player6')">
+    </div>
+    <span class="player" ng-click="enableEditor('player6')">{{player6}}</span>
+  </li>
+</ul>
+
+
+<div class="centerPanel" ng-show="editorEnabled">
+  <input ng-model="editableTitle" ng-show="editorEnabled">
+  <button class="little skew" ng-click="save()">
+        Save
+      </button>
+</div>
+<div class="centerPanelHeroes" ng-show="picking">
+  <ul class="heroesList">
+    <li ng-tooltip="{{hero.label}}" ng-repeat="hero in heroes" ng-click="pick(hero)">
+      <img class="heroAvatar skew" width=50 height=50 src="images/owheroes/{{hero.label}}.png">
+      <span>{{hero.name}}</span>
+    </li>
+  </ul>
+  <button class="little close skew" ng-click="close()">close</button>
+</div>
+<div class="centerPanelHeroes" ng-show="pickingMap">
+  <ul class="heroesList">
+    <li ng-repeat="map in maps" ng-click="setMap(map)">
+      <span>{{map.name}}</span>
+    </li>
+  </ul>
+  <button class="little close skew" ng-click="close()">close</button>
+</div>
+<div class="centerPanelHeroes" ng-show="sharePanel">
+  <p class="clipboard" ng-show="copyDone">Copied to clipboard</p>
+  <p class="link" ng-copyable ng-click="copied()">
+    http://tools.manaberry.io/#/pick/{{p1.id}}/{{p2.id}}/{{p3.id}}/{{p4.id}}/{{p5.id}}/{{p6.id}}/{{p10.id}}/{{p20.id}}/{{p30.id}}/{{p40.id}}/{{p50.id}}/{{p60.id}}/{{map.id}}/{{player1}}/{{player2}}/{{player3}}/{{player4}}/{{player5}}/{{player6}}
+  </p>
+  <button class="little close skew" ng-click="close()">close</button>
+</div>
+<button class="share skew" ng-click="share()">
+    SHARE
+  </button>

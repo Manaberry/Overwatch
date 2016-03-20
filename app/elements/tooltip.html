@@ -1,0 +1,37 @@
+<div id="tooltip">
+<div ng-if="display">
+<img class="heroAvatar skew" height=50 width=50 src="images/owheroes/{{hero.label}}.png">
+<span class="heroname">
+	<span class="toolname">{{hero.name}}</span>
+	<span class="toolrole">{{hero.role}}</span>
+</span>
+<ul>
+	<li style="background:url(images/health.png) no-repeat;" class="health">{{hero.health}}</li>
+	<li style="background:url(images/abilities/{{hero.label}}/ability-1.png) no-repeat;">{{hero.ability1[0]}}<br>
+		<span class="dmg">{{hero.ability1[1]}}</span>
+		<span class="dmgoff">{{hero.ability1[2]}}</span>
+		<span class="duration">{{hero.ability1[3]}}</span>
+	</li>
+	<li style="background:url(images/abilities/{{hero.label}}/ability-2.png) no-repeat;">{{hero.ability2[0]}}<br>
+		<span class="dmg">{{hero.ability2[1]}}</span>
+		<span class="cooldown">{{hero.ability2[2]}}</span>
+		<span class="duration">{{hero.ability2[3]}}</span>
+	</li>
+	<li style="background:url(images/abilities/{{hero.label}}/ability-3.png) no-repeat;">{{hero.ability3[0]}}<br>
+		<span class="dmg">{{hero.ability3[1]}}</span>
+		<span class="cooldown">{{hero.ability3[2]}}</span>
+		<span class="duration">{{hero.ability3[3]}}</span>
+	</li>
+	<li style="background:url(images/abilities/{{hero.label}}/ability-4.png) no-repeat;">{{hero.ability4[0]}}<br>
+		<span class="dmg">{{hero.ability4[1]}}</span>
+		<span class="cooldown">{{hero.ability4[2]}}</span>
+		<span class="duration">{{hero.ability4[3]}}</span>
+	</li>
+	<li class="ability-u" style="background:url(images/abilities/{{hero.label}}/ability-u.png) no-repeat;">{{hero.abilityu[0]}}<br>
+		<span class="dmg">{{hero.abilityu[1]}}</span>
+		<span class="cooldown">{{hero.abilityu[2]}}</span>
+		<span class="duration">{{hero.abilityu[3]}}</span>
+	</li>
+</ul>
+</div>
+</div>

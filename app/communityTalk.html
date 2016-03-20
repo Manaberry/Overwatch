@@ -1,0 +1,39 @@
+<div class="talk-message">
+
+	<ul>
+		<button class="reply skew" ng-click="$parent.showrep = ! $parent.showrep" ng-if="logged">REPLY</button>
+		<button class="reply skew"  ng-if="!logged">SIGN IN TO POST</button>
+		<li class="pagination tc">
+			<button class="next skew left" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><span class="icon-chevron_left"></button>
+			
+			<button class="next unskew right" ng-disabled="currentPage >= talk.length/postPerPage - 1" ng-click="currentPage=currentPage+1"><span class="icon-chevron_right"></span></button>
+    	</li>
+	    <li class="rad talk-response nopad" ng-show="showrep" ng-if="logged">
+			<textarea col="50" rows="5" class="talk-text-area" ng-model="resp" placeholder="Write your response to the topic" ng-keypress="guardoff()"></textarea>
+			<button class="skew" ng-click="talkResponse(resp)" ng-disabled="disabled" ng-if=logged>SUBMIT</button>
+		</li>
+		<li class="rad wipe talk" ng-repeat="post in talk | pageFrom:currentPage*postPerPage | limitTo:postPerPage">
+			<div class="top-post">
+				<span class="right posted">{{post.date | fromNow}}</span><br>
+				<span class="right database">#{{post.id}}</span><br>
+				<span class="adminsize" ng-if=admin>
+					<span class="right controls red timeout icon-settings_ethernet" title="Timeout the message" ng-hide="timeout" ng-click="timeout = ! timeout"></span>
+					<span class="right controls red timeout icon-done" ng-show="timeout" ng-click="timeoutResponse(post)"></span>
+					<span class="right controls red delete icon-close" title="Delete the message" ng-hide="del" ng-click="del = ! del"></span>
+					<span class="right controls red delete icon-done" ng-show="del" ng-click="deleteTalkReponse(post)"></span>
+				</span>
+			</div>
+			<div ng-user="{{post.poster_id}}"></div>
+			<div ng-if="post.hidden==0 || admin">
+				<p ng-bind="post.content | hero" class="left talk-post-content"></p>
+			</div>
+			<div ng-if="post.hidden==1">
+				<p class="left talk-post-content hidden"><i>Hidden by moderators team.</i></p>
+			</div>
+		</li>
+		<li class="pagination">
+			<button class="next unskew left" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><span class="icon-chevron_left"></button>
+			<button class="next skew right" ng-disabled="currentPage >= talk.length/postPerPage - 1" ng-click="currentPage=currentPage+1"><span class="icon-chevron_right"></span></button>
+    	</li>
+	</ul>
+</div>
