@@ -1,13 +1,12 @@
 'use strict';
-manatools.controller('profileController', function($scope,$location,$http,$routeParams,$timeout,loginService){
+manatools.controller('profileController', function($scope,loginService){
 
 
-	$scope.connected = 'Sign in';
 	$scope.submit = function(user){
 		loginService.login(user,$scope);
 	};
 	$scope.logout = function(){
-		loginService.logout();
+		loginService.logout($scope);
 	};
 	$scope.enter = function($event,user){
 		if ($event.keyCode === 13) {
@@ -16,7 +15,8 @@ manatools.controller('profileController', function($scope,$location,$http,$route
 	};
 	var connected=loginService.islogged();
             connected.then(function(msg){
-            	$scope.connected = msg.data[0];
+            	$scope.online = msg.data[0];
+            	$scope.o = msg.data[0].message;
             });
 
 });

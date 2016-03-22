@@ -157,7 +157,7 @@ $app->get("/session/check", function ($request, $response, $args) {
             }else{
             	$data[] = array(
             		'status' => false,
-            		'message' => 'Not connected'
+            		'message' => 'not connected'
             		);
             }
     return $response->withHeader('Content-Type', 'application/json')->write(json_encode($data));
@@ -204,7 +204,9 @@ $app->post("/session/login", function (Request $request, Response $response) {
 				$data[] = array(
 			            		'status' => true,
 			            		'message' => 'Connected',
-			            		'uid' => $_SESSION['uid']
+			            		'uid' => $_SESSION['uid'],
+                                'message' => "connected as $username",
+                                'user' => $_SESSION['user']
 			            		);
 			}else{
 				$data[] = array(
@@ -222,7 +224,7 @@ $app->post("/session/login", function (Request $request, Response $response) {
 $app->get('/community/lastpost/{id}', function (Request $request, Response $response) {
     $id = $request->getAttribute('id');
     $db = db();
-    $lastpost = $db->select('talk',['date'], ['topic_id' => "$id", "ORDER" => ['date DESC']]);
+    $lastpost[] = $db->get('talk',['date'], ['topic_id' => "$id", "ORDER" => ['date DESC']]);
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($lastpost));

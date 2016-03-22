@@ -79,21 +79,27 @@ manatools.directive('ngUser', function($http){
 manatools.factory('loginService', function($http,$location,sessionService,$timeout,$cookies,$cookieStore){
 	return {
 		login:function(user,scope){
+					scope.connect = null;
 					$http({method: 'POST', url: 'http://localhost/manatools/api/session/login', data: user}).success(function(data, status){
+							scope.connect = data[0].status;
+							scope.o = data[0].message;
 							sessionService.set('manatools_v1', data[0].uid);
-							scope.intolog = data;
-							scope.connected = data[0];
-							scope.details = data[0].message;
-			    	}).error(function(data, status){
-			    		scope.intolog = data;
-			    		scope.connected = data[0];
-			    		scope.details = data[0].message;
-			    	});
+							$timeout(function(){
+								scope.intolog = data;
+								scope.online = data[0];
+								scope.connect = null;
+							}, 1000);
+			    	}).error(function(data, status){});
 				},
 		logout:function(scope){
 			sessionService.destroy('manatools_v1');
 			$cookieStore.remove('manatools_v1');
-			$location.path('profile');
+			$http({method: 'GET', url: 'http://localhost/manatools/api/session/destroy'}).success(function(data, status){
+							scope.intolog = data;
+							scope.online = data[0];
+							scope.o = data[0].message;
+							console.log(data[0]);
+			    	}).error(function(data, status){});
 		},
 		islogged:function(){
 			var $checkSessionServer=$http.get('http://localhost/manatools/api/session/check');

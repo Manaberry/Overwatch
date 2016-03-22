@@ -10,7 +10,7 @@
     	</li>
 	    <li class="rad talk-response nopad" ng-show="showrep" ng-if="logged">
 			<textarea col="50" rows="5" class="talk-text-area" ng-model="resp" placeholder="Write your response to the topic" ng-keypress="guardoff()"></textarea>
-			<button class="skew" ng-click="talkResponse(resp)" ng-disabled="disabled" ng-if=logged>SUBMIT</button>
+			<button class="skew" ng-click="talkResponse(resp)" ng-disabled="disabled || !resp" ng-if=logged>SUBMIT</button>
 		</li>
 		<li class="rad wipe talk" ng-repeat="post in talk | pageFrom:currentPage*postPerPage | limitTo:postPerPage">
 			<div class="top-post">
