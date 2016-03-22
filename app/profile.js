@@ -1,7 +1,6 @@
 'use strict';
-manatools.controller('profileController', function($scope,loginService){
-
-
+manatools.controller('profileController', function($scope,$http,$timeout,loginService){
+	$scope.setIcon = 'settings';
 	$scope.submit = function(user){
 		loginService.login(user,$scope);
 	};
@@ -18,5 +17,39 @@ manatools.controller('profileController', function($scope,loginService){
             	$scope.online = msg.data[0];
             	$scope.o = msg.data[0].message;
             });
+    $scope.getInfos = function(user){
+    	$http({method: 'GET',cache:true, url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
+			$scope.rank = data[0].rank;
+			$scope.btag = data[0].btag;
+		}).error(function(data, status){});
+    }
 
+    $scope.disableEditor = function() {
+      $scope.editorEnabled = false;
+    };
+    $scope.enableEditor = function(infosSlot) {
+    	$scope.focused = infosSlot;
+      	$scope.editorEnabled = true;
+      	if(infosSlot == 'btag'){
+        	$scope.editableTitle = $scope.btag;
+      	}
+    };
+    $scope.save = function(user) {
+      var focus = $scope.focused;
+      if(focus == 'btag'){
+        $scope.btag = $scope.editableTitle;
+      }
+      var btag = $scope.btag;
+      $http({method: 'POST',cache:true, data: {btag:btag}, url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
+			$scope.disableEditor();
+			$scope.updated = data[0];
+			$scope.setIcon = 'check';
+			$timeout(function(){
+		        $scope.updated = null;
+		        $scope.setIcon = 'settings';
+		    }, 1500);
+		}).error(function(data, status){});
+      
+    };
+   
 });

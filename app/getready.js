@@ -87,8 +87,10 @@ manatools.factory('loginService', function($http,$location,sessionService,$timeo
 							$timeout(function(){
 								scope.intolog = data;
 								scope.online = data[0];
+							}, 1500);
+							$timeout(function(){
 								scope.connect = null;
-							}, 1000);
+							}, 3000);
 			    	}).error(function(data, status){});
 				},
 		logout:function(scope){

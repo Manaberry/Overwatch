@@ -101,11 +101,40 @@ $app->get("/session/users", function ($request, $response, $args) {
 });
 $app->get('/user/{id}', function (Request $request, Response $response) {
     $id = $request->getAttribute('id');
-    $db = db();
-    $all = $db->select('users',['user_id','username','avatar','rank'], ['user_id' => "$id"]);
+    session_start();
+    if ($id == $_SESSION['user']) {
+        $db = db();
+        $all = $db->select('users',['user_id','username','avatar','rank','region','btag'], ['user_id' => "$id"]);
+    }else{
+        $db = db();
+        $all = $db->select('users',['user_id','username','avatar','rank'], ['user_id' => "$id"]);
+    }
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($all));
+});
+$app->post('/user/{id}', function (Request $request, Response $response) {
+    $id = $request->getAttribute('id');
+    $requestBody = $request->getParsedBody();
+    $btag = $requestBody['btag'];
+    session_start();
+    if ($id == $_SESSION['user']) {
+        $db = db();
+        $db->update('users',['btag' => "$btag"], ['user_id' => "$id"]);
+        $all[] = array(
+            'status' => true,
+            'message' => 'profile saved'
+            );
+    }else{
+        $all[] = array(
+            'status' => false,
+            'message' => 'session problem'
+            );
+    }
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($all));
+
 });
 $app->get("/session/destroy", function ($request, $response, $args) {
 	session_start();
@@ -135,15 +164,24 @@ $app->get("/session/check", function ($request, $response, $args) {
 		            		'moderator' => true,
 		            		'beta' => true
 		            		);
-                    }elseif($rank == 7){
+                    }elseif($rank == 9){
                         $data[] = array(
 		            		'status' => true,
 		            		'message' => "connected as $username",
                             'user' => $userid,
 		            		'admin' => false,
-		            		'moderator' => false,
+		            		'moderator' => true,
 		            		'beta' => true
 		            		);
+                    }elseif($rank == 7){
+                        $data[] = array(
+                            'status' => true,
+                            'message' => "connected as $username",
+                            'user' => $userid,
+                            'admin' => false,
+                            'moderator' => false,
+                            'beta' => true
+                            );
                     }elseif($rank == 1){
                         $data[] = array(
                             'status' => true,

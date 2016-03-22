@@ -5,18 +5,27 @@
         	<br>
         	<input type="password" ng-model="user.password" placeholder="password" required>
         	<br>
-        	<span class="details {{connect}}">{{o}}</span>
+        	<span ng-if="connect != null" id="connect" class="rad skew details {{connect}}">{{o}}</span>
 	</form>
 	<button class="skew {{connect}}" ng-click="submit(user)" ng-enter="submit(user)" ng-disabled="logform.$invalid">Access</button>
 </div>
 
 <div class="login" ng-keypress="enter($event,user)" ng-if="online.status">
-	<h2>{{o}}</h2>
+	<h3><i>{{o}}</i></h3>
 	<div ng-user="{{online.user}}"></div>
-	<button ng-click="logout()" class="red skew">Logout</button>
+	<span ng-init="getInfos(online.user)"><b>Registered user</b> #{{online.user}}</span>
+	<br>
+	<span><b>Rank</b> #{{rank}}</span>
+	<br>
+	<span><b>Battle.net</b> {{btag}}</span>
+	<br><br><br>
+	<button ng-click="logout()" class="initial red skew">Logout</button>
+	<button ng-click="enableEditor('btag')" class="initial skew ease {{updated.status}}"><span class="icon-{{setIcon}}"></span></button>
 </div>
 
-
-<div class="backhistory">
-	<a href="#/"><button class="share skew">Back to home</button></a>
+<div class="centerPanel rad skew" ng-show="editorEnabled">
+  <input ng-model="editableTitle" ng-show="editorEnabled">
+  <button class="little" ng-click="save(online.user)">
+        Save
+      </button>
 </div>
