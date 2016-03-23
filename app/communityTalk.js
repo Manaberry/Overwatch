@@ -17,6 +17,7 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
         $scope.status = status;
         $scope.currentPage = 0;
         $scope.postPerPage = 10;
+        $scope.ready = true;
         $scope.numberOfPages=function(){
             return Math.ceil($scope.talk.length/$scope.postPerPage);                
         }
