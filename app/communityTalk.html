@@ -2,7 +2,7 @@
 
 	<ul>
 		<button class="reply skew" ng-click="$parent.showrep = ! $parent.showrep" ng-if="logged">REPLY</button>
-		<button class="reply skew"  ng-if="!logged">SIGN IN TO POST</button>
+		<button class="reply skew" ng-if="!logged" ng-click="register()">SIGN IN TO POST</button>
 		<li class="pagination tc">
 			<button class="next skew left" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><span class="icon-chevron_left"></button>
 			

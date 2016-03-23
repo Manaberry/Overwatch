@@ -40,7 +40,6 @@ manatools.directive('ngMenu', function($http,$compile,$timeout){
 	    	scope.linkCommunity = '#/community';
 	    	scope.linkProfile = '#/profile';
 	    	$http({method: 'GET', url: 'http://localhost/manatools/api/session/check'}).success(function(data, status){
-							sessionService.set('manatools_v1', data[0].uid);
 							scope.intolog = data;
 							scope.connected = data[0];
 							scope.details = data[0].message;
@@ -59,11 +58,10 @@ manatools.directive('ngUser', function($http){
     	scope: {
     		ngUser: '@'
     	},
-    	template: '<div class="skew talk-poster ba-{{user.rank}}"><div class="rad img-crop"><img ng-src="http://media.manatools.com/avatar/{{user.avatar}}" class="poster-avatar"></div><span class="poster-name">{{user.username}}</span><span class="poster-name poster-status">{{rankName[user.rank]}}</span></div>',
+    	template: '<div class="skew talk-poster ba-{{user.rank}}"><div class="rad img-crop"><img ng-src="http://media.manatools.com/avatar/overwatch/{{user.avatar}}" class="poster-avatar unskew"></div><span class="poster-name">{{user.username}}</span><span class="poster-name poster-status">{{rankName[user.rank]}}</span></div>',
     	link: function(scope, element, attrs) {
       		$http({method: 'GET', cache:true,url: url + attrs.ngUser}).success(function(data, status, headers, config){
 	        	scope.user = data[0];
-	        	console.log(data);
 	    	});
 	    	scope.rankName  = {
                 "1":"User",
@@ -151,12 +149,8 @@ manatools.directive('ngLastpost', function($http){
     	template: '<div ng-if="!nopost">No message yet</div><div ng-if="nopost">Last message <b>{{lastpost.date | fromNow}}</b></div>',
     	link: function(scope, element, attrs) {
       		$http({method: 'GET', cache:true, url: url + attrs.ngLastpost}).success(function(data, status, headers, config){
-	        	if (data[0] == null) {
-	        		scope.nopost = false;
-	        	}else{
 	        		scope.lastpost = data[0];
-	        		scope.nopost = true;
-	        	}
+	        		scope.nopost = data[0];
 	    	});
 		}
 	};

@@ -12,20 +12,35 @@
 
 <div class="login" ng-keypress="enter($event,user)" ng-if="online.status">
 	<h3><i>{{o}}</i></h3>
-	<div ng-user="{{online.user}}"></div>
-	<span ng-init="getInfos(online.user)"><b>Registered user</b> #{{online.user}}</span>
+	<div ng-init="getInfos(online.user)">
+		<div class="skew talk-poster ba-{{theuser.rank}} changeavatar" ng-click="selectAvatar()" title="Click to select avatar">
+			<div class="rad img-crop">
+				<img ng-src="http://media.manatools.com/avatar/overwatch/{{theuser.avatar}}" class="poster-avatar unskew">
+			</div>
+			<span class="poster-name">{{theuser.username}}</span>
+			<span class="poster-name poster-status">{{rankName[theuser.rank]}}</span>
+		</div>
+	</div>
 	<br>
-	<span><b>Rank</b> #{{rank}}</span>
+	<span><b>Registered user</b> #{{online.user}}</span>
 	<br>
-	<span><b>Battle.net</b> {{btag}}</span>
+	<span><b>Rank</b> #{{theuser.rank}}</span>
+	<br>
+	<span><b>Battle.net</b> {{theuser.btag}}</span>
 	<br><br><br>
 	<button ng-click="logout()" class="initial red skew">Logout</button>
 	<button ng-click="enableEditor('btag')" class="initial skew ease {{updated.status}}"><span class="icon-{{setIcon}}"></span></button>
 </div>
 
 <div class="centerPanel rad skew" ng-show="editorEnabled">
-  <input ng-model="editableTitle" ng-show="editorEnabled">
-  <button class="little" ng-click="save(online.user)">
-        Save
-      </button>
+  <input ng-model="theuser.btag" ng-show="editorEnabled">
+  <br>
+  <button class="little" ng-click="save()">Save</button>
+</div>
+<div class="centerPanelHeroes" ng-show="showAvatar">
+  <ul class="heroesList avatarList">
+    <li ng-repeat="avt in avatars" ng-click="set(avt)" style="background-image:url(http://media.manatools.com/avatar/overwatch/{{avt.link}});">
+    </li>
+  </ul>
+  <button class="little close skew" ng-click="showAvatar = false">close</button>
 </div>

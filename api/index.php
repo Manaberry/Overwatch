@@ -102,9 +102,14 @@ $app->get("/session/users", function ($request, $response, $args) {
 $app->get('/user/{id}', function (Request $request, Response $response) {
     $id = $request->getAttribute('id');
     session_start();
-    if ($id == $_SESSION['user']) {
-        $db = db();
-        $all = $db->select('users',['user_id','username','avatar','rank','region','btag'], ['user_id' => "$id"]);
+    if (isset($_SESSION['user'])) {
+        if ($id == $_SESSION['user']){
+            $db = db();
+            $all = $db->select('users',['user_id','username','avatar','rank','region','btag'], ['user_id' => "$id"]);
+        }else{
+            $db = db();
+            $all = $db->select('users',['user_id','username','avatar','rank'], ['user_id' => "$id"]);
+        }
     }else{
         $db = db();
         $all = $db->select('users',['user_id','username','avatar','rank'], ['user_id' => "$id"]);
@@ -117,10 +122,11 @@ $app->post('/user/{id}', function (Request $request, Response $response) {
     $id = $request->getAttribute('id');
     $requestBody = $request->getParsedBody();
     $btag = $requestBody['btag'];
+    $avt = $requestBody['avatar'];
     session_start();
     if ($id == $_SESSION['user']) {
         $db = db();
-        $db->update('users',['btag' => "$btag"], ['user_id' => "$id"]);
+        $db->update('users',['btag' => "$btag",'avatar' => "$avt"], ['user_id' => "$id"]);
         $all[] = array(
             'status' => true,
             'message' => 'profile saved'

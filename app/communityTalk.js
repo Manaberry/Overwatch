@@ -30,7 +30,9 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
             $scope.talk.splice(0, 1);
         };
     });
-
+    $scope.register = function(){
+        $location.path('/profile');
+    };
 
     $scope.talkResponse = function(content){
         $scope.disabled = true;
@@ -46,7 +48,6 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
                 poster_id: create.data.poster});
             $scope.showrep = false;
         }).error(function(data, status, headers, config){
-            console.log(data, status);
         })
     };
     $scope.deleteTalkReponse = function(post){

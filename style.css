@@ -41,7 +41,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2429', end
   div.top{position: fixed;top:0;right:0;left:0;background:#111519;}
   .centerPanel{padding:2rem;position:fixed;top:50%;left:50%;margin:-82px -125px;background:#111519;box-shadow: #000 0 0 3px;}
   .centerPanelHeroes{padding:1rem;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.8);box-shadow: #000 0 0 90px;z-index:200;}
-  ul.heroesList{position:fixed;height:300px;width:503px;top:50%;left:50%;margin:-162px -250px;padding:1rem 0;list-style-type:none;overflow-y:scroll;background: rgba(0,0,0,0.2);}
+  ul.heroesList{position:fixed;height:300px;width:503px;top:50%;left:50%;margin:-162px -250px;padding:1rem 0;list-style-type:none;overflow-y:scroll;background:rgb(19, 23, 27);}
+  ul.avatarList{padding:0}
   ul.heroesList li{float:left;width:100px;height:100px;text-align:center;cursor:pointer;position:relative;}
   ul.heroesList li:hover img{border:solid 2px #0081FF;box-shadow: #0081FF 0 0 21px;background:#5BC1FF;}
   ul.heroesList li:hover span{text-shadow:cyan 0 0 6px;color:white;}
@@ -117,17 +118,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2429', end
         .top-post span.timeout{clear: both;padding: 0;position: absolute;bottom: 25px;right: 0;}
         .hidden{color:#D73E3E!important;clear: both;}
     .talk-poster{background-position: center center;width: 150px;height:125px;position: absolute;margin: 0;padding:25px;text-align: center;border-right:solid #1C2225 1px;}
-        div.img-crop{height: 80px;width: 80px;overflow: hidden;border:solid 2px #17191C;margin: 6px 31px;}
+        div.img-crop{height: 80px;width: 80px;overflow: hidden;border:solid 2px #24272B;margin: 6px 31px;}
         li.img-crop{height: 80px;width: 80px;overflow: hidden;border:solid 2px rgb(16, 26, 35);margin: 10px 58px;}
-        .poster-avatar{width: auto;height: 80px;}
-        .poster-name{color: #fff;width: 100%;padding:0;float: left;font-family:'brandon-grotesque',Arial,sans-serif;font-weight:500;text-transform: capitalize;}
-        .poster-status{font-family:Arial,sans-serif;font-size:11px;}
+        .poster-avatar{width: auto;height: 88px;margin:-4px!important;}
+        .poster-name{color: #fff;width: 100%;padding:0;float: left;font-family:'brandon-grotesque',Arial,sans-serif;font-size:1.1rem;font-weight:500;text-transform: capitalize;}
+        .poster-status{font-family:Arial,sans-serif;font-size:.75rem;}
     .talk-post-content{margin: 0px 110px 0 230px;font-family:Arial,sans-serif;font-size: 14px;line-height: 20px;color:#ccc;font-weight: 300;white-space:pre-line;}
     
     .talk-response{overflow: hidden;text-align:center;}
     .talk-text-area{min-height: 149px;font-family:Arial,sans-serif;}
 
-    /*ADMIN*/   .ba-10{background-image:url('images/community/admin_backavatar2.png');}
+    /*ADMIN*/   .ba-10{}
                 .ba-10 span.poster-status,.ba-10 .img-crop,.ca-10,.ca-10 .img-crop{color: #FFBD40;border-color: #FFBD40;}
                 .ba-10 .img-crop{box-shadow: rgba(255, 189, 64, 0.4) 0 0 12px;}
     /*SUPPORT*/ .ba-9{}
@@ -151,8 +152,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2429', end
       -ms-transform: skewX(0deg); /* IE 9 */
     -webkit-transform: skewX(0deg); /* Safari */
     transform: skewX(0deg);}
+    div.login div div.talk-poster img{border:none;position:inherit;margin:0 auto;
+      -ms-transform: skewX(0deg); /* IE 9 */
+      -webkit-transform: skewX(0deg); /* Safari */
+    transform: skewX(0deg);}
     .highlight{padding:.3rem .8rem;color:#FFBD40;}
     .highlight:hover{color:#000;background:#fff;cursor: pointer;}
+    .changeavatar div:hover{cursor:pointer;border-color:#fff;box-shadow:inset #fff 0 0 9px;}
+    .changeavatar div:hover img{opacity:.5;}
+    .avatarList li{background-repeat:no-repeat;background-position:center center;background-size:80px;}
+    .avatarList li:hover{background-color:#0D1013;}
 
 
 
