@@ -40,7 +40,7 @@ manatools.controller('profileController', function($scope,$http,$timeout,loginSe
         $scope.btag = $scope.editableTitle;
       }
       var btag = $scope.btag;
-      $http({method: 'POST',cache:true, data: {btag:btag}, url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
+      $http({method: 'POST',data: {btag:btag}, url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
 			$scope.disableEditor();
 			$scope.updated = data[0];
 			$scope.setIcon = 'check';
