@@ -6,7 +6,7 @@ manatools.controller('profileController', function($scope,$http,$timeout,loginSe
             	$scope.o = msg.data[0].message;
             });
     $scope.getInfos = function(user){
-    	$http({method: 'GET',cache:true, url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
+    	$http({method: 'GET', url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
 		    $scope.theuser = data[0];
 		    $scope.loaded = true;
 		}).error(function(data, status){});
