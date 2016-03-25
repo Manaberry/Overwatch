@@ -1,17 +1,16 @@
 'use strict';
 manatools.controller('profileController', function($scope,$http,$timeout,loginService){
 	var connected=loginService.islogged();
-            connected.then(function(msg){
-            	$scope.online = msg.data[0];
-            	$scope.o = msg.data[0].message;
-            });
-    $scope.getInfos = function(user){
-    	$http({method: 'GET', url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
-		    $scope.theuser = data[0];
-		    $scope.loaded = true;
+  	connected.then(function(msg){
+     	$scope.online = msg.data[0];
+     	$scope.ot = msg.data[0].message;
+  });
+  $scope.getInfos = function(user){
+  	$http({method: 'GET', url: 'http://localhost/manatools/api/user/'+user}).success(function(data, status){
+			$scope.theuser = data[0];
+			$scope.loaded = true;
 		}).error(function(data, status){});
-    };
-	
+  };
 	$scope.setIcon = 'settings';
 	$scope.setAvatar = 'image';
 	$scope.avatars = [
@@ -59,6 +58,10 @@ manatools.controller('profileController', function($scope,$http,$timeout,loginSe
 		{"id":41,"link":"avatar40.png"},
 		{"id":42,"link":"avatar41.png"}
 	];
+	$scope.avatarsAdmin = [
+		{"id":0,"link":"avatar00.png"},
+		{"id":1,"link":"mana.png"}
+	];
 	$scope.rankName  = {
                 "1":"User",
                 "6":"Blizzard Employee",
@@ -79,7 +82,7 @@ manatools.controller('profileController', function($scope,$http,$timeout,loginSe
 	$scope.enter = function($event,user){
 		if ($event.keyCode === 13) {
 			loginService.login(user,$scope);
-		};
+		}
 	};
     $scope.disableEditor = function() {
       $scope.editorEnabled = false;
@@ -96,12 +99,17 @@ manatools.controller('profileController', function($scope,$http,$timeout,loginSe
     	var theuser = $scope.theuser;
       	$http({method: 'POST',data: {btag:theuser.btag,avatar:theuser.avatar}, url: 'http://localhost/manatools/api/user/'+theuser.user_id}).success(function(data, status){
 			$scope.disableEditor();
+			$scope.o = data[0].message;
 			$scope.updated = data[0];
 			$scope.setIcon = 'check';
+			$scope.system = true;
+            $timeout(function(){
+								$scope.system = false;
+							}, 2000);
 			$timeout(function(){
 		        $scope.updated = null;
 		        $scope.setIcon = 'settings';
-		    }, 1000);
+		    }, 1500);
 		}).error(function(data, status){});
     };
    

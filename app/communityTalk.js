@@ -4,6 +4,7 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
             connected.then(function(msg){
                 $scope.logged = msg.data[0].status;
                 $scope.admin = msg.data[0].admin;
+                $scope.moderator = msg.data[0].moderator;
                 $scope.poster = msg.data[0].user;
                 $scope.beta = msg.data[0].beta;
             });
@@ -45,8 +46,7 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
         };
         $http(create).success(function(data, status, headers, config){
             var c = $scope.talk.length + 1;
-            $scope.talk.splice(0, 0, {content: create.data.content,
-                poster_id: create.data.poster});
+            $scope.talk.splice(0, 0, {content: create.data.content,poster_id: create.data.poster,hidden: 0});
             $scope.showrep = false;
         }).error(function(data, status, headers, config){
         })
@@ -55,24 +55,36 @@ manatools.controller('communityTalkController', function($scope,$http,$routePara
         var idx = $scope.talk.indexOf(post);
         var del = {
             method: 'POST',
-            url: 'http://localhost/manatools/api/delete/',
+            url: 'http://localhost/manatools/api/community/delete/',
             data: {
                 id: post.id
             }
         };
         $http(del).success(function(data, status, headers, config){
-            $scope.status = data;
-            $scope.talk.splice(idx, 1);
+            $scope.o = data[0].message;
+            $scope.system = true;
+            $timeout(function(){
+                                $scope.system = false;
+                            }, 2000);
+            console.log(data);
+            if (data[0].status == true) {
+                $scope.talk.splice(idx, 1);
+            };
         }).error(function(status){})
     };
     $scope.timeoutResponse = function(post){
         var idx = $scope.talk.indexOf(post);
         var timeout = {
-            method: 'GET',
-            url: 'http://localhost/manatools/api/timeout/'+post.id
+            method: 'POST',
+            url: 'http://localhost/manatools/api/community/timeout/',
+            data: {id:post.id}
         };
         $http(timeout).success(function(data, status, headers, config){
-            $scope.status = data;
+            $scope.o = data[0].message;
+                        $scope.system = true;
+            $timeout(function(){
+                                $scope.system = false;
+                            }, 2000);
         }).error(function(status){});
     };
 });

@@ -2,6 +2,18 @@
 var manatools = angular.module('manatools',['ngClipboard','ngAnimate','ngRoute','ngSanitize','ngCookies']);
 
 
+manatools.directive('ngSystem', function($http,$compile,$timeout){
+	return {
+    	scope: {ngSystem: '@'},
+			link: function(scope, element, attrs) {
+				$('#system').html(attrs.ngSystem);
+				$compile($('#system').contents())(scope);
+				$('#system').fadeIn(300);
+				$timeout(function(){
+						$('#system').fadeOut(300);
+		    }, 2000);
+		}}
+});
 manatools.directive('ngTooltip', function($http,$compile,$timeout){
 	var url = 'http://localhost/manatools/api/heroes/';
   	return {
@@ -58,7 +70,7 @@ manatools.directive('ngUser', function($http){
     	scope: {
     		ngUser: '@'
     	},
-    	template: '<div class="skew talk-poster ba-{{user.rank}}"><div class="rad img-crop"><img ng-src="http://media.manatools.com/avatar/overwatch/{{user.avatar}}" class="poster-avatar unskew"></div><span class="poster-name">{{user.username}}</span><span class="poster-name poster-status">{{rankName[user.rank]}}</span></div>',
+    	template: '<div class="skew talk-poster ba-{{user.rank}}"><div class="rad img-crop"><img ng-src="http://media.manatools.com/avatar/overwatch/{{user.avatar}}" class="poster-avatar unskew"></div><span class="poster-name">{{user.username}}</span><span ng-if="user.rank > 1" class="poster-name poster-status">{{rankName[user.rank]}}</span></div>',
     	link: function(scope, element, attrs) {
       		$http({method: 'GET', cache:true,url: url + attrs.ngUser}).success(function(data, status, headers, config){
 	        	scope.user = data[0];
@@ -80,6 +92,7 @@ manatools.factory('loginService', function($http,$location,sessionService,$timeo
 					scope.connect = null;
 					$http({method: 'POST', url: 'http://localhost/manatools/api/session/login', data: user}).success(function(data, status){
 							scope.connect = data[0].status;
+							scope.ot = data[0].message;
 							scope.o = data[0].message;
 							sessionService.set('manatools_v1', data[0].uid);
 							$timeout(function(){
